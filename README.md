@@ -1,27 +1,38 @@
-# 🐙 Homelab Gitea
+# 🐙 Homelab Gitea (Git Service)
 
-Self-hosted Git service providing repository management, webhooks, and issue tracking.
-
-Part of the [homelab-core](https://github.com/kiskaadee/homelab-core) cluster ecosystem.
+Self-hosted lightweight Git service, code repository, and issue tracker.
 
 ---
 
-## 🏗️ Architecture & Storage
+## 🏗️ Architecture & Requirements
 
-- **Container Image**: `gitea/gitea:latest`
-- **Proxy**: Traefik (attached to `proxy-net`)
-- **Persistent Data**: `./data` (gitignored, bind-mounted to `/data`)
-- **SSH Port**: `222` (Host SSH passthrough)
-- **Web Port**: `3000` (Traefik ingress)
+- **Proxy Network**: Attached to external `proxy-net`
+- **Domain**: `gitea.roadtotech.me`
+- **Target Port**: `3000` (HTTP Web), `2222` (SSH)
 
 ---
 
-## ⚙️ Environment Variables
+## ⚙️ Configuration & Metadata (`app.yaml`)
 
-| Variable | Description | Default / Example |
-| :--- | :--- | :--- |
-| `GITEA_DOMAIN` | Web UI FQDN | `gitea.arch-services.mywire.org` |
-| `GITEA_SSH_DOMAIN` | SSH clone domain | `gitea.arch-services.mywire.org` |
+```yaml
+name: "gitea"
+aliases:
+  - "git"
+domain: "gitea.roadtotech.me"
+description: "Self-Hosted Git Service & Code Repository"
+visible: true
+auth: false
+networks:
+  - proxy-net
+env:
+  SSH_DOMAIN: "gitea.roadtotech.me"
+homepage:
+  title: "Gitea"
+  group: "Development & AI"
+  icon: "gitea.png"
+  container: "gitea"
+  weight: 10
+```
 
 ---
 
@@ -29,10 +40,15 @@ Part of the [homelab-core](https://github.com/kiskaadee/homelab-core) cluster ec
 
 ### Via Orchestrator (`appctl`)
 ```bash
-appctl up homelab-gitea
+appctl up gitea
 ```
 
 ### Manual Deployment
 ```bash
 docker compose up -d
 ```
+
+---
+
+## 📄 License
+This repository is released into the public domain under the [Unlicense](LICENSE).
