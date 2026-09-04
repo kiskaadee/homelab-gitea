@@ -1,0 +1,15 @@
+name: "gitea"
+aliases:
+  - "git"
+domain: "gitea.roadtotech.me"
+description: "Self-Hosted Git Service & Code Repository"
+visible: true
+auth: false
+networks:
+  - proxy-net
+homepage:
+  title: "Gitea"
+  group: "Development & AI"
+  icon: "gitea.png"
+  container: "gitea"
+  weight: 10
