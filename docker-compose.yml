@@ -23,12 +23,12 @@ services:
       - "traefik.http.routers.${CONTAINER_NAME:-gitea}.rule=Host(`${SERVICE_DOMAIN}`)"
       - "traefik.http.routers.${CONTAINER_NAME:-gitea}.entrypoints=websecure"
       - "traefik.http.routers.${CONTAINER_NAME:-gitea}.tls=true"
-      - "traefik.http.routers.${CONTAINER_NAME:-gitea}.middlewares=${AUTH_MIDDLEWARE}"
+      - "traefik.http.routers.${CONTAINER_NAME:-gitea}.middlewares=${AUTH_MIDDLEWARE:-https-redirect@docker}"
       - "traefik.http.routers.${CONTAINER_NAME:-gitea}.service=${CONTAINER_NAME:-gitea}-svc"
       # HTTP to HTTPS Redirect Router
       - "traefik.http.routers.${CONTAINER_NAME:-gitea}-red.rule=Host(`${SERVICE_DOMAIN}`)"
       - "traefik.http.routers.${CONTAINER_NAME:-gitea}-red.entrypoints=web"
-      - "traefik.http.routers.${CONTAINER_NAME:-gitea}-red.middlewares=${HTTPS_REDIRECT_MIDDLEWARE}"
+      - "traefik.http.routers.${CONTAINER_NAME:-gitea}-red.middlewares=${HTTPS_REDIRECT_MIDDLEWARE:-https-redirect@docker}"
       # Service definition
       - "traefik.http.services.${CONTAINER_NAME:-gitea}-svc.loadbalancer.server.port=3000"
 

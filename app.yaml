@@ -7,6 +7,8 @@ visible: true
 auth: false
 networks:
   - proxy-net
+env:
+  SSH_DOMAIN: "gitea.roadtotech.me"
 homepage:
   title: "Gitea"
   group: "Development & AI"
