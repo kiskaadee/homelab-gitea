@@ -10,7 +10,11 @@ services:
       - GITEA__database__DB_TYPE=${DB_TYPE:-sqlite3}
       - GITEA__server__DOMAIN=${SERVICE_DOMAIN}
       - GITEA__server__SSH_DOMAIN=${SSH_DOMAIN:-${SERVICE_DOMAIN}}
+      - GITEA__server__SSH_PORT=${SSH_PORT:-2223}
+      - GITEA__server__SSH_LISTEN_PORT=22
       - GITEA__server__ROOT_URL=https://${SERVICE_DOMAIN}
+    ports:
+      - "${SSH_PORT:-2223}:22"
     volumes:
       - ${DATA_PATH:-./data}:/data
       - /etc/timezone:/etc/timezone:ro

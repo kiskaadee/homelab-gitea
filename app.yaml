@@ -9,6 +9,7 @@ networks:
   - proxy-net
 env:
   SSH_DOMAIN: "gitea.roadtotech.me"
+  SSH_PORT: "2223"
 homepage:
   title: "Gitea"
   group: "Development & AI"
